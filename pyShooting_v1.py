@@ -49,7 +49,7 @@ def runGame():
     x=padWidth * 0.45
     y=padHeight * 0.9
     fighterX = 0
-
+    fighterY = 0
     onGame =False
     while not onGame:
         for event in pygame.event.get():
@@ -62,6 +62,10 @@ def runGame():
                     fighterX -=5
                 elif event.key == pygame.K_RIGHT:
                     fighterX +=5
+                elif event.key == pygame.K_UP:
+                    fighterY -=5
+                elif event.key == pygame.K_DOWN:
+                    fighterY +=5
                 elif event.key == pygame.K_SPACE:
                     missileX = x+fighterWidth/2
                     missileY = y - fighterHeight
@@ -69,6 +73,8 @@ def runGame():
             if event.type in [pygame.KEYUP]:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     fighterX =0
+                elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    fighterY =0
 
         drawObject(background, 0, 0)
 
@@ -77,6 +83,13 @@ def runGame():
             x = 0
         elif x > padWidth - fighterWidth:
             x = padWidth - fighterWidth
+
+        y+= fighterY
+        if y<0:
+            y=0
+        elif y > padWidth - fighterWidth:
+            y = padWidth - fighterWidth
+
 
         drawObject(fighter, x, y)
 
@@ -88,7 +101,7 @@ def runGame():
                 if bxy[1] < rockY:
                     if bxy[0] > rockX and bxy[0] < rockX + rockWidth:
                         missileXY.remove(bxy)
-                        isShot = T
+
 
                 if bxy[1] <= 0:
                     try:
