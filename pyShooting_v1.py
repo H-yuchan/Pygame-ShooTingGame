@@ -36,6 +36,26 @@ def writePassde(count):
     text = font.render('놓친 운석 :' + str(count), True, (255, 0, 0))
     gamePad.blit(text, (360, 0))
 
+#게임 메세지 출력
+def writeMessge(text):
+    global gamePad
+    font = pygame.font.Font('PyShooting/NanumGothic.ttf', 80)
+    text = font.render(text, True, (255, 0, 0))
+    textpos = text.get_rect()
+    textpos.center = (padWidth/2, padHeight/2)
+    gamePad.blit(text, textpos)
+    pygame.display.update()
+    sleep(2)
+    runGame()
+
+def crash():
+    global gamePad
+    writeMessge("전투기 파괴!")
+
+def gameOver():
+    global gamePad
+    writeMessge("게임 오버!")
+
 def runGame():
     global gamePad, clock, background, fighter, missile, explosion
 
@@ -103,8 +123,16 @@ def runGame():
         elif y > padHeight - fighterWidth:
             y = padHeight - fighterWidth
 
+        if y < rockY + rockHeight:
+            if(rockX > x and rockX < x + fighterWidth) or (rockX + rockWidth > x and rockX + rockWidth< x + fighterWidth):
+                crash()
+
 
         drawObject(fighter, x, y)
+
+        if rockPassed ==3:#운석 3개 놓치면 게임 오버
+            gameOver()
+
 
         if len(missileXY) != 0:
             for i, bxy in enumerate(missileXY):
