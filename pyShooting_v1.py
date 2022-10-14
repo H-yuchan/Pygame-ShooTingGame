@@ -151,6 +151,10 @@ def runGame():
             rockY = 0
             isShot = False
 
+            rockSpeed +=0.05
+            if rockSpeed >= 10:
+                rockSpeed =10
+
 
 
         drawObject(rock, rockX, rockY)
