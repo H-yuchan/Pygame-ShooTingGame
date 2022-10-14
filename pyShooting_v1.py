@@ -23,6 +23,19 @@ def initGame():
     explosion = pygame.image.load('PyShooting/explosion.png')
     clock = pygame.time.Clock()
 
+
+def writeScore(count):
+    global gamePad
+    font = pygame.font.Font('PyShooting/NanumGothic.ttf', 20)
+    text = font.render('파괴한 운석 수:' + str(count), True, (255,255,255))
+    gamePad.blit(text, (10,0))
+
+def writePassde(count):
+    global gamePad
+    font = pygame.font.Font('PyShooting/NanumGothic.ttf', 20)
+    text = font.render('놓친 운석 :' + str(count), True, (255, 0, 0))
+    gamePad.blit(text, (360, 0))
+
 def runGame():
     global gamePad, clock, background, fighter, missile, explosion
 
@@ -112,6 +125,9 @@ def runGame():
             for bx, by in missileXY:
                 drawObject(missile, bx, by)
 
+
+        writeScore(shotCount)
+
         rockY +=rockSpeed
 
         if rockY > padHeight:
@@ -122,7 +138,8 @@ def runGame():
 
             rockX = random.randrange(0, padWidth - rockWidth)
             rockY = 0
-
+            rockPassed +=1
+        writePassde(rockPassed)
         if isShot:
             drawObject(explosion, rockX, rockY)
 
@@ -133,6 +150,8 @@ def runGame():
             rockX = random.randrange(0, padWidth - rockWidth)
             rockY = 0
             isShot = False
+
+
 
         drawObject(rock, rockX, rockY)
 
