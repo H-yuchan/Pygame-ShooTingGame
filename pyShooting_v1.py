@@ -13,7 +13,7 @@ def drawObject(obj, x, y):
     gamePad.blit(obj,(x,y))
 
 def initGame():
-    global gamePad, clock, background, fighter, missile
+    global gamePad, clock, background, fighter, missile, explosion
     pygame.init()
     gamePad = pygame.display.set_mode((padWidth, padHeight))
     pygame.display.set_caption('PyShooting')
@@ -24,7 +24,7 @@ def initGame():
     clock = pygame.time.Clock()
 
 def runGame():
-    global gamePad, clock, background, fighter, missile
+    global gamePad, clock, background, fighter, missile, explosion
 
 
     isShot = False
@@ -101,8 +101,8 @@ def runGame():
                 if bxy[1] < rockY:
                     if bxy[0] > rockX and bxy[0] < rockX + rockWidth:
                         missileXY.remove(bxy)
-
-
+                        isShot = True
+                        shotCount += 1
                 if bxy[1] <= 0:
                     try:
                         missileXY.remove(bxy)
