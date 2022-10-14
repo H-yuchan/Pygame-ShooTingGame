@@ -6,7 +6,7 @@ from time import sleep
 BLACK = (0,0,0)
 padWidth = 480
 padHeight = 640
-rockImage = ['/Users/yuchan/PycharmProjects/pythonProject4/PyShooting/rock01.png','/Users/yuchan/PycharmProjects/pythonProject4/PyShooting/rock02.png']
+rockImage = ['PyShooting/rock01.png','PyShooting/rock02.png']
 
 def drawObject(obj, x, y):
     global gamePad
@@ -17,9 +17,9 @@ def initGame():
     pygame.init()
     gamePad = pygame.display.set_mode((padWidth, padHeight))
     pygame.display.set_caption('PyShooting')
-    background = pygame.image.load('/Users/yuchan/PycharmProjects/pythonProject4/PyShooting/background.png')
-    fighter = pygame.image.load('/Users/yuchan/PycharmProjects/pythonProject4/PyShooting/fighter.png')
-    missile = pygame.image.load('/Users/yuchan/PycharmProjects/pythonProject4/PyShooting/missile.png')
+    background = pygame.image.load('PyShooting/background.png')
+    fighter = pygame.image.load('PyShooting/fighter.png')
+    missile = pygame.image.load('PyShooting/missile.png')
     explosion = pygame.image.load('PyShooting/explosion.png')
     clock = pygame.time.Clock()
 
@@ -87,8 +87,8 @@ def runGame():
         y+= fighterY
         if y<0:
             y=0
-        elif y > padWidth - fighterWidth:
-            y = padWidth - fighterWidth
+        elif y > padHeight - fighterWidth:
+            y = padHeight - fighterWidth
 
 
         drawObject(fighter, x, y)
