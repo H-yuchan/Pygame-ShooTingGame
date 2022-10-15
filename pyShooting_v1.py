@@ -1,4 +1,3 @@
-#운석 맞추기 미완성
 import sys
 import pygame
 import random
@@ -135,7 +134,7 @@ def runGame():
         elif y > padHeight - fighterWidth:
             y = padHeight - fighterWidth
 
-        if y < rockY + rockHeight:
+        if rockY<= y <= rockY + rockHeight:
             if(rockX > x and rockX < x + fighterWidth) or (rockX + rockWidth > x and rockX + rockWidth< x + fighterWidth):
                 crash()
 
@@ -151,7 +150,7 @@ def runGame():
                 bxy[1] -=10
                 missileXY[i][1] = bxy[1]
 
-                if bxy[1] < rockY:
+                if bxy[1] < rockY and y>rockY:
                     if bxy[0] > rockX and bxy[0] < rockX + rockWidth:
                         missileXY.remove(bxy)
                         isShot = True
